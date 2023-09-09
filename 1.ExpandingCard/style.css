@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+body {
+    font-family: 'Muli', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+} 
+
+.container {
+    display: flex;
+    width: 90vw;
+}
+
+.panel {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 80vh;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    flex: 0.5;
+    /* 다른 flex item과 비교하여 상대적인 크기를 나타냄 */
+    /* 애니메이션 수정 값이 될 속성 */
+    margin: 10px;
+    position: relative;
+    /* 자식 요소(h3)의 배치를 상대적으로 조절할 수 있음 */
+    transition: flex 0.7s ease-in;
+    /* flex 속성이 변경될 때, 0.7초동안 변화를 적용하고 부드럽게 일어나도록 함*/
+    /* flex 속성 => flex : 0.5에서 변화를 줄 때 */
+    /* 사진의 크기가 커지는 것이 아니라, 전환되도록 */
+}
+
+.panel h3{
+    font-size: 24px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    /* 글자 아래쪽으로 위치 조정 */
+    margin: 0;
+    opacity: 0;
+    /* 글자가 안보였다가 활성되면 보여줌 */
+}
+
+.panel.active {
+    flex: 5;
+}
+
+.panel.active h3 {
+    opacity: 1;
+    transition: opacity 0.3s ease-in 0.4s;
+    /* 다른 카드로 전환할 때 글자가 완전히 확장되기 전에는 보여지지 않도록 함 */
+    /* 0.3s: 전환 효과가 적용되는 시간 => 속성 값이 변경될 때 0.3초동안 투명도가 부드럽게 변화 */
+    /* 0.4s: 전환 지연 시간 => 0.4초 동안 대기한 후에 전환 효과가 시작됨 */
+    /* ==> 초기 상태에서 0.4초 동안 아무런 변화가 없는 다음 0.3초 동안 투명도가 부드럽게 변화 */
+}
+
+@media(max-width: 480px) {
+    /* 화면이 480px 이하일 때만 적용되는 내용 */
+    .container {
+        width: 100vw;
+        /* 화면이 좁아지면 여백을 줄이고 공간을 더 넓게 차기하기 위함 */
+    }
+
+    .panel:nth-of-type(4),.panel:nth-child(5) {
+        display: none;
+    /* 화면이 작아지면 맨 오른쪽 두개 item은 화면에서 안보이도록 */
+    /* ==> 작은 화면엔 이미지가 3개만 나타남 */
+    }
+}
