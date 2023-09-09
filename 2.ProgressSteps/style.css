@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+
+/* 동일한 색상을 여러번 사용할 때 사용 */
+/* 사용자 정의 CSS 변수 */
+:root {
+    --line-border-fill: #3498db;
+    --line-border-empty:  #e0e0e0;
+}
+
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f6f7fb;
+    font-family: 'Muli' sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 30px;
+    max-width: 100%;
+    width: 350px;
+}
+
+/* 버튼을 클릭하기 전 기본 값은 회색 선 */
+/* 가상요소를 사용해 파란색 선과 형태가 똑같은 회색 선을 만듦 */
+.progress-container::before { 
+    content:'';
+    background-color: var(--line-border-empty);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 100%;
+    /* 100%로 드러나야함 */
+    z-index: -1;
+}
+
+.progress {
+    background-color: var(--line-border-fill);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    /* 정중앙에 놓기 위함*/
+    height: 4px;
+    width: 0%;
+    z-index: -1;
+    /* 숫자보다 뒤에 위치해야함 */
+    transition: 0.4s ease;
+    /* 나타났다가 다음 선으로 전환되어야 함 */
+}
+
+.circle {
+    background-color: #fff;
+    color: #999;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--line-border-empty);
+    transition: 0.4s ease;
+}
+
+/* 활성화되었을 때 테두리 선이 바뀜 */
+.circle.active {
+    border-color: var(--line-border-fill);
+}
+
+.btn {
+    background-color: var(--line-border-fill);
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 8px 30px;
+    margin: 5px;
+    font-size: 14px;
+}
+
+/* 버튼이 활성화될 때 (클릭될 때) */
+/* 클릭한 순간의 시각적 효과를 반영하여 클릭되었음을 나타냄 */
+.btn:active {
+    transform: scale(0.55);
+    /* 버튼을 클릭하면 살짝 작아짐 */
+}
+
+/* 버튼이 FOCUS를 받았을 때: 사용자로부터 입력을 받을 수 있는 상태 */
+.btn:focus {
+    outline: 3px dotted red;
+}
+
+.btn:disabled {
+    /* 버튼이 비활성화 상태일 때 */
+    background-color: var(--line-border-empty);
+}
